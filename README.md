@@ -33,7 +33,7 @@ The container user is `fpga-env`. Its Python environment is under
 DISPLAY configuration such as `host.docker.internal:0`.
 
 Shared development environments and VS Code configuration are maintained in
-[VHDLivery/fpga-env](https://github.com/VHDLivery/fpga-env), which consumes this
+[VHDLivery/docker-fpga-env](https://github.com/VHDLivery/docker-fpga-env), which consumes this
 image without needing a checkout of this repository.
 
 ## GitHub Actions and releases
