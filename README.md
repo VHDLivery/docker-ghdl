@@ -46,8 +46,8 @@ on Linux AMD64 and ARM64. The checks can also be started manually.
 Publishing a GitHub release builds each architecture once on its native
 runner, uploads the image by digest and tests that exact image. Only after
 both architectures pass are the tested images combined under release tags
-at `ghcr.io/vhdlivery/docker-ghdl`. The release tag is used
-as the image tag, for example `v1.0.0`. Stable releases additionally update
+at `ghcr.io/vhdlivery/docker-ghdl`. The release tag becomes the image tag with its leading `v` removed.
+For example, release `v6.0.0-1` publishes image tag `6.0.0-1`. Stable releases additionally update
 `latest`; prereleases only publish their release tag. Draft releases and Git
 tag pushes alone do not publish images.
 
