@@ -64,3 +64,10 @@ from a failed run may remain in GHCR without release tags.
 Hadolint checks run before CI builds and release builds. The lint image is
 pinned by digest. DL3064 is suppressed only for the non-secret USERNAME
 argument, which selects the local Linux account.
+
+## Image build stages
+
+GHDL is compiled in a separate builder stage. The final image contains the
+installed GHDL files, LLVM and GNAT runtime libraries, GCC, and libc/zlib
+development files needed to link simulations. GNAT, Clang and LLVM
+development tools are excluded. Python, VUnit, fpgather, GTKWave and Git remain available.
