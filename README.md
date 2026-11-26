@@ -1,19 +1,21 @@
 # docker-ghdl
 
 Docker environment for VHDL simulation with GHDL, VUnit, fpgather and GTKWave.
-GHDL uses the LLVM backend. VUnit and fpgather are installed without version
-pins and are resolved when the image is built.
+GHDL 6.0.0 uses the LLVM backend. The Ubuntu base image is pinned by digest;
+explicit Ubuntu packages and Python packages are pinned to exact versions.
+Transitive Ubuntu dependencies still resolve from the configured repositories.
 
 ## Build and test
 
 From this repository's root:
 
 ```sh
+./scripts/lint.sh
 ./scripts/build.sh
 ./scripts/test.sh
 ```
 
-Both scripts accept an optional image name and tag as their first argument.
+The build and test scripts accept an optional image name and tag as their first argument.
 The test script checks the tools and runs three VUnit counter tests.
 Results are written under `examples/vhdl/build/ghdl/`.
 See [the example documentation](examples/vhdl/README.md) for the source manifest
@@ -28,8 +30,8 @@ docker run --rm -it -v "$PWD:/workspace" -w /workspace \
   ghcr.io/vhdlivery/docker-ghdl:latest bash
 ```
 
-The container user is `fpga-env`. Its Python environment is under
-`/home/fpga-env/.venv`. On macOS, GTKWave requires XQuartz and a suitable
+The container user is `developer`. Its Python environment is under
+`/home/developer/.venv`. On macOS, GTKWave requires XQuartz and a suitable
 DISPLAY configuration such as `host.docker.internal:0`.
 
 Shared development environments and VS Code configuration are maintained in
@@ -52,9 +54,13 @@ tag pushes alone do not publish images.
 The workflow uses the automatic `GITHUB_TOKEN`, with no Docker Hub credentials
 or personal token. Organization settings must allow package creation. Check
 package visibility after the first publication if anonymous pulls are desired.
-Release builds bypass the build cache, so rebuilding the same release can
-resolve newer unpinned Python packages.
+Release builds bypass the build cache. Pinned package versions must remain
+available in the upstream repositories; this is not a snapshot-based build.
 
 Release builds do not use QEMU emulation. If either architecture fails its
 build or tests, release tags are not updated. Uploaded digest-only images
 from a failed run may remain in GHCR without release tags.
+
+Hadolint checks run before CI builds and release builds. The lint image is
+pinned by digest. DL3064 is suppressed only for the non-secret USERNAME
+argument, which selects the local Linux account.

@@ -16,8 +16,8 @@ fpgather resolves this manifest and generates `build/ghdl/fpgather/sources.csv` 
 its settings file, which the runner imports into VUnit. Generated files contain
 absolute local paths and must not be committed.
 
-The image includes unpinned `fpgather` and `vunit_hdl` packages. Both versions
-are selected at image build time; existing images do not update automatically.
+The image includes pinned fpgather and VUnit versions, specified in the
+Dockerfile. Existing images do not update automatically.
 
 ## Waveform viewer on macOS
 

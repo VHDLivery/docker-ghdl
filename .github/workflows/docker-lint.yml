@@ -1,0 +1,15 @@
+name: Dockerfile lint
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Lint Dockerfile with Hadolint
+        run: ./scripts/lint.sh

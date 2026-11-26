@@ -27,7 +27,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lint:
+    uses: ./.github/workflows/docker-lint.yml
+
   build:
+    needs: lint
     name: Build GHDL (${{ matrix.platform }})
     strategy:
       fail-fast: false

@@ -12,7 +12,11 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  lint:
+    uses: ./.github/workflows/docker-lint.yml
+
   build:
+    needs: lint
     name: Build and test (${{ matrix.platform }})
     permissions:
       contents: read

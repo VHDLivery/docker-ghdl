@@ -12,5 +12,5 @@ docker run --rm --user "$(id -u):$(id -g)" \
     ghdl --version
     python3 -c "import vunit, fpgather"
     fpgather --help
-    python3 src/sim/scripts/run.py -o build/ghdl/vunit
+    python3 src/sim/scripts/run.py --clean -o build/ghdl/vunit
   '
