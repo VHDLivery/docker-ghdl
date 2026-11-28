@@ -108,7 +108,7 @@ RUN python3 -m venv "${VIRTUAL_ENV}" \
     && pip install --no-cache-dir pip==26.3 \
     && pip install --no-cache-dir \
         vunit_hdl==4.7.1 \
-        fpgather==0.1.0 \
+        fpgather==0.2.0 \
         colorama==0.4.6 \
         PyYAML==6.0.4
 
